@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Tally</title>
+
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Tally">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="theme-color" content="#2563eb">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <!-- Tab 1: Today -->
+    <section id="tab-today" class="tab active" aria-label="Today">
+      <p id="today-date" class="date-label"></p>
+      <div id="count" class="count" role="status" aria-live="polite">0</div>
+
+      <div id="steps" class="steps" role="radiogroup" aria-label="Step size">
+        <button type="button" class="step" role="radio" data-step="5">5</button>
+        <button type="button" class="step" role="radio" data-step="20">20</button>
+        <button type="button" class="step" role="radio" data-step="50">50</button>
+        <button type="button" class="step" role="radio" data-step="100">100</button>
+      </div>
+
+      <div class="adjust">
+        <button type="button" id="minus" class="adjust-btn minus">&minus;5</button>
+        <button type="button" id="plus" class="adjust-btn plus">+5</button>
+      </div>
+    </section>
+
+    <!-- Tab 2: History -->
+    <section id="tab-history" class="tab" aria-label="History">
+      <div id="ranges" class="ranges" role="radiogroup" aria-label="Date range">
+        <button type="button" class="range" role="radio" data-range="7">7 days</button>
+        <button type="button" class="range" role="radio" data-range="30">30 days</button>
+        <button type="button" class="range" role="radio" data-range="all">All</button>
+      </div>
+
+      <div id="chart-wrap" class="chart-wrap">
+        <canvas id="chart" aria-label="Line graph of the number for each day"></canvas>
+      </div>
+      <p id="chart-empty" class="chart-empty" hidden></p>
+
+      <ul id="history-list" class="rows"></ul>
+
+      <div class="io">
+        <button type="button" id="export" class="io-btn">Export JSON</button>
+        <button type="button" id="import" class="io-btn">Import JSON</button>
+        <input type="file" id="import-file" accept=".json,application/json" hidden>
+      </div>
+
+      <div id="import-panel" class="import-panel" hidden>
+        <p id="import-text"></p>
+        <div class="import-actions">
+          <button type="button" id="import-merge" class="io-btn">Merge</button>
+          <button type="button" id="import-replace" class="io-btn danger">Replace all</button>
+          <button type="button" id="import-cancel" class="io-btn">Cancel</button>
+        </div>
+      </div>
+
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <nav class="tabbar" aria-label="Tabs">
+    <button type="button" class="tabbtn active" data-tab="today">Today</button>
+    <button type="button" class="tabbtn" data-tab="history">History</button>
+  </nav>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" crossorigin="anonymous" defer></script>
+  <script src="app.js" defer></script>
+</body>
+</html>
